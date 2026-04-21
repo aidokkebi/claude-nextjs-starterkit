@@ -1,3 +1,9 @@
+// ================================================================
+// [복사 위치] lib/prisma.ts
+// [사전 준비]
+//   1. .env에 DATABASE_URL 값 입력
+//   2. pnpm db:generate 실행 (Prisma 클라이언트 생성)
+// ================================================================
 import { PrismaClient } from "@/app/generated/prisma/client"
 import { PrismaPg } from "@prisma/adapter-pg"
 

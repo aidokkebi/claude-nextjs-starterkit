@@ -1,4 +1,8 @@
-import { auth } from "@/auth"
+// ================================================================
+// [복사 위치] app/dashboard/page.tsx (또는 원하는 보호 페이지 경로)
+// [사전 준비] lib/auth.ts 가 존재해야 합니다
+// ================================================================
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { User, CreditCard, Settings } from "lucide-react"
 

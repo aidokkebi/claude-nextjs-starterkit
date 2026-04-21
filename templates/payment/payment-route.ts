@@ -1,3 +1,7 @@
+// ================================================================
+// [복사 위치] app/api/payment/route.ts
+// [사전 준비] .env에 TOSS_CLIENT_KEY, TOSS_SECRET_KEY 값 입력
+// ================================================================
 import { NextRequest, NextResponse } from "next/server"
 
 // 토스페이먼츠 결제 승인 API

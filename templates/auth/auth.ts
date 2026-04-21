@@ -1,3 +1,11 @@
+// ================================================================
+// [복사 위치] lib/auth.ts
+// [사전 준비]
+//   1. templates/database/prisma.ts → lib/prisma.ts 로 복사
+//   2. .env에 AUTH_SECRET, AUTH_KAKAO_ID/SECRET, AUTH_NAVER_ID/SECRET,
+//      AUTH_GOOGLE_ID/SECRET 값 입력
+//   3. pnpm db:generate && pnpm db:push 실행
+// ================================================================
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import Kakao from "next-auth/providers/kakao"
