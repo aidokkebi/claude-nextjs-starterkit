@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
-import { SessionProvider } from "next-auth/react"
 import { Header } from "@/components/layout/Header"
 import "./globals.css"
 
@@ -15,12 +14,11 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "스타터킷 | 한국 서비스",
-  description: "Next.js 기반 한국 서비스 스타터킷",
+  title: "Next.js 스타터킷",
+  description: "한국 서비스 개발을 위한 Next.js 스타터킷",
 }
 
-// 루트 레이아웃 - 모든 페이지를 감싸는 최상위 컴포넌트
-// SessionProvider로 감싸야 useSession() 훅을 어디서든 사용할 수 있어요
+// 루트 레이아웃 - 로그인 없이 자유롭게 사용 가능한 스타터킷
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,10 +30,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <SessionProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-        </SessionProvider>
+        <Header />
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   )
