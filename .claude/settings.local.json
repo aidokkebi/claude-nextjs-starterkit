@@ -4,7 +4,21 @@
       "Bash(pnpm add *)",
       "Bash(pnpm build *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(winget list *)",
+      "Bash(winget install *)",
+      "PowerShell(winget install *)",
+      "Bash(git init *)",
+      "Bash(where gh *)",
+      "Bash(gh auth *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Expand-Archive *)",
+      "PowerShell($ghExe = \"C:\\\\Users\\\\SB\\\\AppData\\\\Local\\\\gh\\\\bin\\\\gh.exe\"; & $ghExe --version)",
+      "Bash(/c/Users/SB/AppData/Local/gh/bin/gh.exe auth *)",
+      "Bash(/c/Users/SB/AppData/Local/gh/bin/gh.exe repo *)",
+      "Bash(git push *)",
+      "Bash(git filter-branch *)",
+      "Bash(git stash *)"
     ]
   }
 }
