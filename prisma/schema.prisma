@@ -1,0 +1,64 @@
+// Prisma 스키마 파일
+// 데이터베이스 구조를 정의하는 설계도 같은 파일
+
+generator client {
+  provider = "prisma-client-js"
+  // Prisma 7에서 생성되는 클라이언트 파일 위치
+  output   = "../app/generated/prisma"
+}
+
+// Prisma 7부터 url은 prisma.config.ts에서 관리해요
+datasource db {
+  provider = "postgresql"
+}
+
+// ========== Auth.js 필수 모델 ==========
+// 아래 4개 모델은 NextAuth가 로그인 정보를 저장하는 데 반드시 필요해요
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("user") // 사용자 역할 (user, admin)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String  // "kakao", "naver", "google"
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
