@@ -67,15 +67,17 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* 세션 정보 (개발용) */}
-      <div className="mt-8 p-4 border border-border rounded-lg bg-muted/50">
-        <p className="text-xs text-muted-foreground mb-2 font-mono">
-          [개발용] 현재 세션 정보:
-        </p>
-        <pre className="text-xs text-foreground overflow-auto">
-          {JSON.stringify(session, null, 2)}
-        </pre>
-      </div>
+      {/* 세션 정보 (개발 환경에서만 표시) */}
+      {process.env.NODE_ENV === "development" && (
+        <div className="mt-8 p-4 border border-border rounded-lg bg-muted/50">
+          <p className="text-xs text-muted-foreground mb-2 font-mono">
+            [개발용] 현재 세션 정보:
+          </p>
+          <pre className="text-xs text-foreground overflow-auto">
+            {JSON.stringify(session, null, 2)}
+          </pre>
+        </div>
+      )}
     </div>
   )
 }
