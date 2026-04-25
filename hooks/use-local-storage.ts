@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(initialValue)
@@ -14,7 +14,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     }
   }, [key])
 
-  const setValue = (value: T | ((prev: T) => T)) => {
+  const setValue = useCallback((value: T | ((prev: T) => T)) => {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value
       setStoredValue(valueToStore)
@@ -22,7 +22,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     } catch {
       // localStorage 쓰기 실패 시 메모리 상태만 업데이트
     }
-  }
+  }, [key, storedValue])
 
   return [storedValue, setValue] as const
 }
