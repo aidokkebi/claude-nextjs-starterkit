@@ -19,7 +19,16 @@
       "Bash(git push *)",
       "Bash(git filter-branch *)",
       "Bash(git stash *)",
-      "Bash(pnpm tsc *)"
+      "Bash(python3 *)",
+      "Bash(node *)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(claude mcp *)",
+      "Bash(pnpm dlx *)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "shadcn"
+  ]
 }
