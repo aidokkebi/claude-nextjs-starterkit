@@ -77,6 +77,31 @@ export default function Error({ error, unstable_retry }: { unstable_retry: () =>
 ```
 설정은 `tailwind.config.js` 파일이 없고, `app/globals.css`의 `@theme inline` 블록에서 관리된다.
 
+### 폰트 시스템
+
+`app/layout.tsx`에서 `next/font/google`으로 Geist Sans/Mono를 로드한 뒤, `app/globals.css`의 `@theme inline`에 CSS 변수로 연결된다:
+
+```css
+/* @theme inline 내부 */
+--font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+--font-mono: var(--font-geist-mono), ui-monospace, monospace;
+```
+
+새 폰트를 추가할 때도 `@theme inline`에 등록해야 Tailwind `font-sans` 등의 유틸리티가 정상 동작한다.
+
+### 커스텀 훅 SSR 패턴
+
+`hooks/` 디렉토리의 훅은 모두 `"use client"`지만 SSR 환경(hydration 중)에서 `window`에 접근하면 오류가 발생한다. `useState` lazy initializer에서 `typeof window === "undefined"` 가드를 사용한다:
+
+```ts
+const [value, setValue] = useState(() => {
+  if (typeof window === "undefined") return defaultValue
+  // window 접근 로직
+})
+```
+
+`useEffect` 내에서 동기적으로 `setState`를 호출하면 ESLint `react-hooks/set-state-in-effect` 오류가 발생한다 — lazy initializer로 대체해야 한다.
+
 ## 환경 변수
 
 `.env.example` 참고. 필수 변수:
